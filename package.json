@@ -1,0 +1,31 @@
+{
+  "name": "in8",
+  "version": "1.0.0",
+  "description": "Acessar esse site e pegar todos os notebooks Lenovo ordenando do mais barato para o mais caro. Pegar todos os dados disponíveis de cada produto.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "npm run test && ts-node -r tsconfig-paths/register src/server.ts",
+    "dev": "ts-node-dev -r tsconfig-paths/register src/server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/body-parser": "^1.19.2",
+    "body-parse": "^0.1.0",
+    "express": "^4.18.2",
+    "puppeteer": "^19.5.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.15",
+    "@types/jest": "^29.2.5",
+    "@types/node": "^18.11.18",
+    "jest": "^29.3.1",
+    "ts-jest": "^29.0.5",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.1.2",
+    "typescript": "^4.9.4"
+  }
+}

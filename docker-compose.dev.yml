@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  in8-api:
+    tty: true
+    stdin_open: true
+    container_name: in8-api
+    build:
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/usr/app
+    working_dir: /usr/app

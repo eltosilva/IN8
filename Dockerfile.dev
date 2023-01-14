@@ -1,0 +1,9 @@
+FROM docker.io/node:latest
+
+WORKDIR /src/app
+
+RUN npm i -g typescript jest
+
+EXPOSE 3000
+
+CMD ["npm", "run", "dev"]
