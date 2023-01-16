@@ -1,3 +1,4 @@
+import Scraper from 'app/proxy/scraper';
 import bodyParser from 'body-parser';
 import express from 'express';
 import { Server } from 'http';
@@ -24,6 +25,7 @@ export class SetupApplication {
   }
 
   public start(): void {
+    Scraper.start();
     this.server = this.app.listen(this.port, () => {
       console.log(`Server running on port ${this.port}`)
     })
