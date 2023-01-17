@@ -1,59 +1,35 @@
 import { Browser, ElementHandle, launch, Page } from 'puppeteer';
-import { Product } from './product';
-
-var scraper: Scraper;
+import { Product } from '@app/product/product';
 
 export default class Scraper {
 
-  private readonly URL: string = 'https://webscraper.io/test-sites/e-commerce/allinone/computers/laptops';
-  
+  public constructor(private readonly url: string) { }
 
-  public constructor(private _products: Array<Product> = new Array<Product>()) {
-    this.fillArray()
-  }
-
-  private async fillArray(): Promise<void> {
-    console.log('Loading data into array...')
+  public async scrapingProducts(): Promise<Product[]> {
     const browser: Browser = await launch();
     const page: Page = await browser.newPage();
 
-    await page.goto(this.URL);
+    await page.goto(this.url);
 
-    const elementList = await page.$$('.thumbnail .caption');
+    const elementList =await page.$$('.thumbnail .caption');
+    const products = new Array<Product>();
 
-    elementList.forEach(x =>{
-      this.scraping(x)
-    })
-
-    console.log('Array full, data loaded...')
+    for(let element of elementList){
+      const product = await this.scraping(element);
+      products.push(product);
+    }
 
     browser.close();
-  }
 
-  private async scraping(element: ElementHandle): Promise<void> {
+    return products;
+  }
+  
+  private async scraping(element: ElementHandle): Promise<Product> {
     const title = await element.$eval('.title', node => node.getAttribute('title')) || ''
     const priceStr = await element.$eval('.price', node => node.innerHTML)
     const price = parseFloat(priceStr.substring(1))
     const description = await element.$eval('.description', node => node.innerHTML)
 
-    this._products.push({title, price, description})
-  }
-
-  public static getScraper() {
-    if (!scraper)
-      Scraper.start();
-
-    return scraper;
-  }
-
-  public static async start() {
-    if(scraper)
-      return;
-    
-    scraper = new Scraper();
-  }
-
-  public get products(): Array<Product> {
-    return this._products;
+    return {title, price, description};
   }
 }

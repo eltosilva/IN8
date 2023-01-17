@@ -1,9 +1,11 @@
-import { Product } from 'app/proxy/product';
+import Strorage from '@app/data/storage';
+import { Product } from '@app/product/product';
 import { Request, Response, Router } from 'express';
 import ProductService from './product-service';
 
 const router = Router()
-const produtctService: ProductService = new ProductService();
+
+const produtctService: ProductService = new ProductService(new Strorage());
 
 router.get('/:brand', (request: Request, response: Response) => {
 
