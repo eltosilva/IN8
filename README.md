@@ -6,5 +6,3 @@ https://webscraper.io/test-sites/e-commerce/allinone/computers/laptops
 É interessante que o robô possa ser consumido por outros serviços. Recomendamos a criação de uma pequena REST Ful API JSON para deixar mais otimizado.
 
 Utilizar Puppeteer ou Playwright (Node ou Python)
-
-Criar um repositório no github e nos enviar o link.

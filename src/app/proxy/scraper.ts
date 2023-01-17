@@ -8,14 +8,12 @@ export default class Scraper {
   private readonly URL: string = 'https://webscraper.io/test-sites/e-commerce/allinone/computers/laptops';
   
 
-  private constructor(private _products: Array<Product> = new Array<Product>()) {
-    console.log(this)
-
+  public constructor(private _products: Array<Product> = new Array<Product>()) {
     this.fillArray()
   }
 
   private async fillArray(): Promise<void> {
-    console.log('Preechendo array...')
+    console.log('Loading data into array...')
     const browser: Browser = await launch();
     const page: Page = await browser.newPage();
 
@@ -27,7 +25,9 @@ export default class Scraper {
       this.scraping(x)
     })
 
-    console.log('Array preenchido...')
+    console.log('Array full, data loaded...')
+
+    browser.close();
   }
 
   private async scraping(element: ElementHandle): Promise<void> {
